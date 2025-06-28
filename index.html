@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella Vista - Digital Menu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="page active">
+        <div class="login-container">
+            <div class="login-background">
+                <div class="bg-shape bg-shape-1"></div>
+                <div class="bg-shape bg-shape-2"></div>
+                <div class="bg-shape bg-shape-3"></div>
+            </div>
+            <div class="login-card">
+                <div class="login-header">
+                    <h1 class="restaurant-name">Bella Vista</h1>
+                    <div class="divider"></div>
+                    <h2>Welcome Back</h2>
+                    <p>Sign in to access your restaurant menu</p>
+                </div>
+                <form id="loginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn-login">
+                        <span class="btn-text">Sign In</span>
+                        <div class="loading-spinner" style="display: none;"></div>
+                    </button>
+                </form>
+                <div class="demo-credentials">
+                    <p>Demo Credentials:</p>
+                    <div class="demo-list">
+                        <p><span class="demo-dot admin"></span>Admin: admin@restaurant.com / admin123</p>
+                        <p><span class="demo-dot customer"></span>Customer: customer@example.com / customer123</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Menu Page -->
+    <div id="menuPage" class="page">
+        <header class="menu-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <h1 class="restaurant-name">Bella Vista</h1>
+                    <p class="tagline">Fine Dining Experience</p>
+                    <div class="divider"></div>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <span class="welcome-text">Welcome back,</span>
+                        <p class="username" id="userName">Customer</p>
+                    </div>
+                    <button class="cart-btn" id="cartBtn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                    <button class="logout-btn" id="logoutBtn">Logout</button>
+                </div>
+            </div>
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search for delicious dishes...">
+                </div>
+            </div>
+        </header>
+
+        <main class="menu-main">
+            <section class="featured-section" id="featuredSection">
+                <div class="section-header">
+                    <h2>Featured Delights</h2>
+                    <div class="divider"></div>
+                </div>
+                <div class="featured-grid">
+                    <div class="featured-column">
+                        <h3><span class="pulse-dot"></span>Today's Specials</h3>
+                        <div id="specialItems" class="featured-items"></div>
+                    </div>
+                    <div class="featured-column">
+                        <h3><i class="fas fa-star"></i>Popular Choices</h3>
+                        <div id="popularItems" class="featured-items"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="menu-section">
+                <div class="category-tabs" id="categoryTabs">
+                    <button class="tab-btn active" data-category="all">All Items</button>
+                    <button class="tab-btn" data-category="Starters">Starters</button>
+                    <button class="tab-btn" data-category="Main Courses">Main Courses</button>
+                    <button class="tab-btn" data-category="Desserts">Desserts</button>
+                    <button class="tab-btn" data-category="Beverages">Beverages</button>
+                </div>
+                <div class="menu-grid" id="menuGrid"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Admin Panel Page -->
+    <div id="adminPage" class="page">
+        <header class="admin-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <h1 class="restaurant-name">Admin Dashboard</h1>
+                    <p class="tagline">Manage Your Menu</p>
+                    <div class="divider"></div>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <span class="welcome-text">Welcome,</span>
+                        <p class="username" id="adminName">Admin</p>
+                    </div>
+                    <button class="logout-btn" id="adminLogoutBtn">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="admin-main">
+            <div class="admin-actions">
+                <button class="btn-primary" id="addItemBtn">+ Add New Item</button>
+            </div>
+
+            <div id="addItemForm" class="item-form" style="display: none;">
+                <h3>Add New Menu Item</h3>
+                <form id="menuItemForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="itemName">Item Name</label>
+                            <input type="text" id="itemName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemPrice">Price ($)</label>
+                            <input type="number" id="itemPrice" step="0.01" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemDescription">Description</label>
+                        <textarea id="itemDescription" rows="3"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="itemCategory">Category</label>
+                            <select id="itemCategory" required>
+                                <option value="">Select Category</option>
+                                <option value="Starters">Starters</option>
+                                <option value="Main Courses">Main Courses</option>
+                                <option value="Desserts">Desserts</option>
+                                <option value="Beverages">Beverages</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemImage">Image URL</label>
+                            <input type="url" id="itemImage">
+                        </div>
+                    </div>
+                    <div class="form-checkboxes">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="isSpecial">
+                            <span>Mark as Special</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="isPopular">
+                            <span>Mark as Popular</span>
+                        </label>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" id="cancelAddBtn">Cancel</button>
+                        <button type="submit" class="btn-primary">Add Item</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="admin-menu-grid" id="adminMenuGrid"></div>
+        </main>
+    </div>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-shopping-cart"></i> Your Order</h2>
+                <button class="close-btn" id="closeCartBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="cartItems" class="cart-items"></div>
+                <div class="cart-total">
+                    <div class="total-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">$0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Tax (10%):</span>
+                        <span id="tax">$0.00</span>
+                    </div>
+                    <div class="total-row total-final">
+                        <span>Total:</span>
+                        <span id="total">$0.00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="clearCartBtn">Clear Cart</button>
+                <button class="btn-primary" id="checkoutBtn">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-credit-card"></i> Checkout</h2>
+                <button class="close-btn" id="closeCheckoutBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="checkout-section">
+                    <h3>Order Summary</h3>
+                    <div id="checkoutItems" class="checkout-items"></div>
+                    <div class="checkout-total">
+                        <div class="total-row">
+                            <span>Total Amount:</span>
+                            <span id="checkoutTotal">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checkout-section">
+                    <h3>Payment Method</h3>
+                    <div class="payment-methods">
+                        <div class="payment-option">
+                            <input type="radio" id="creditCard" name="payment" value="credit" checked>
+                            <label for="creditCard">
+                                <i class="fas fa-credit-card"></i>
+                                Credit Card
+                            </label>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" id="debitCard" name="payment" value="debit">
+                            <label for="debitCard">
+                                <i class="fas fa-money-check"></i>
+                                Debit Card
+                            </label>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" id="cashPayment" name="payment" value="cash">
+                            <label for="cashPayment">
+                                <i class="fas fa-money-bill"></i>
+                                Cash Payment
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkout-section">
+                    <h3>Customer Information</h3>
+                    <div class="form-group">
+                        <label for="customerName">Full Name</label>
+                        <input type="text" id="customerName" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerPhone">Phone Number</label>
+                        <input type="tel" id="customerPhone" placeholder="Enter your phone number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tableNumber">Table Number (Optional)</label>
+                        <input type="text" id="tableNumber" placeholder="Enter your table number">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="backToCartBtn">Back to Cart</button>
+                <button class="btn-primary" id="placeOrderBtn">Place Order</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Confirmation Modal -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-check-circle"></i> Order Confirmed!</h2>
+            </div>
+            <div class="modal-body">
+                <div class="confirmation-content">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Thank you for your order!</h3>
+                    <p>Your order has been successfully placed.</p>
+                    <div class="order-details">
+                        <p><strong>Order ID:</strong> <span id="orderId">#12345</span></p>
+                        <p><strong>Total Amount:</strong> <span id="confirmationTotal">$0.00</span></p>
+                        <p><strong>Payment Method:</strong> <span id="confirmationPayment">Credit Card</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary" id="continueShoppingBtn">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
