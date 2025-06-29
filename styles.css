@@ -244,7 +244,7 @@ body {
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid #fed7aa;
-    position: sticky;
+    position: flex;
     top: 0;
     z-index: 50;
 }
@@ -1079,3 +1079,29 @@ body {
         flex-direction: column;
     }
 }
+.admin-item-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.admin-item-actions .btn-edit,
+.admin-item-actions .btn-delete {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.admin-item-actions .btn-edit {
+    background-color: #007bff;
+    color: white;
+}
+
+.admin-item-actions .btn-delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+
